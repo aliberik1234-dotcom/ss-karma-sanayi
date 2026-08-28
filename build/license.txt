@@ -1,0 +1,22 @@
+﻿S.S. KARMA SANAYİ SİTESİ YAZILIM LİSANS SÖZLEŞMESİ (EULA)
+
+LÜTFEN BU YAZILIM LİSANS SÖZLEŞMESİNİ DİKKATLE OKUYUNUZ.
+
+1. TARAFLAR VE AMAÇ
+Bu Sözleşme, S.S. Karma Sanayi Sitesi Yönetim Sistemi masaüstü yazılımı ("Yazılım") ile bu Yazılımı kuran veya kullanan kooperatif yönetimi ("Kullanıcı") arasında düzenlenmiştir. Yazılım; üyelik, cari, taksit, ödeme, arsa büyüklüğü ve idari süreçlerin yerel ortamda güvenle yönetilmesi amacıyla geliştirilmiştir.
+
+2. LİSANS HAKKI
+Bu Yazılım satılmaz, lisanslanır. Yapımcı (Ali Berik), Kullanıcı'ya Yazılım'ı yalnızca kooperatif yönetimi ve üye takibi amacıyla belirlenen Windows masaüstü bilgisayarlarında kurma ve çalıştırma konusunda münhasır olmayan bir kullanım hakkı vermektedir.
+
+3. KULLANIM VE GÜVENLİK KOŞULLARI
+3.1. Yetkisiz Çoğaltma: Kaynak kodlar ve veritabanı yapısı izinsiz çoğaltılamaz, dağıtılamaz veya kiralanamaz.
+3.2. Tersine Mühendislik: Yazılım üzerinde tersine mühendislik yapılması veya güvenlik mekanizmalarının aşılması yasaktır.
+3.3. Parola Güvenliği: Yönetici (Admin) ve Özel Parola anahtarlarının korunması Kullanıcı'nın sorumluluğundadır.
+
+4. YEDEKLEME VE VERİ SORUMLULUĞU
+Kullanıcı, sistemdeki şifreli yedekleme özelliğini kullanarak verilerini düzenli aralıklarla harici disklere yedeklemekle yükümlüdür. Donanım veya işletim sistemi arızalarından doğabilecek veri kayıplarından yapımcı sorumlu tutulamaz.
+
+5. SORUMLULUK SINIRLARI
+Yazılım mevcut haliyle sunulmaktadır. Yapımcı, bilinen güvenlik açıklarının giderilmesi ve sistem kararlılığının sağlanması için gereken azami özeni gösterir.
+
+© 2026 Ali Berik. Tüm Hakları Saklıdır.

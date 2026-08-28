@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 248, 250, 252;
+    --color-bg-secondary: 255, 255, 255;
+    --color-card: 255, 255, 255;
+    --color-card-hover: 248, 250, 252;
+    --color-text: 15, 23, 42;
+    --color-text-secondary: 71, 84, 106;
+    --color-border: 226, 232, 240;
+    --color-border-hover: 203, 213, 225;
+    --color-accent: 37, 99, 235;
+    --color-accent-hover: 29, 78, 216;
+    --color-accent-bg: 219, 233, 254;
+    --color-input-bg: 255, 255, 255;
+    --color-input-border: 203, 213, 225;
+    --color-shadow: 0, 0, 0;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  html.dark {
+    --color-bg: 15, 23, 42;
+    --color-bg-secondary: 30, 41, 59;
+    --color-card: 30, 41, 59;
+    --color-card-hover: 47, 53, 72;
+    --color-text: 248, 250, 252;
+    --color-text-secondary: 148, 163, 184;
+    --color-border: 51, 65, 85;
+    --color-border-hover: 71, 85, 107;
+    --color-accent: 59, 130, 246;
+    --color-accent-hover: 96, 178, 255;
+    --color-accent-bg: 29, 78, 216;
+    --color-input-bg: 17, 24, 39;
+    --color-input-border: 51, 65, 85;
+    --color-shadow: 0, 0, 0;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 15px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  html.modern-blue {
+    --color-bg: 230, 240, 255;
+    --color-bg-secondary: 235, 245, 255;
+    --color-card: 255, 255, 255;
+    --color-card-hover: 230, 240, 255;
+    --color-text: 15, 23, 42;
+    --color-text-secondary: 64, 78, 95;
+    --color-border: 191, 219, 254;
+    --color-border-hover: 147, 197, 253;
+    --color-accent: 37, 99, 235;
+    --color-accent-hover: 29, 78, 216;
+    --color-accent-bg: 219, 233, 254;
+    --color-input-bg: 255, 255, 255;
+    --color-input-border: 191, 219, 254;
+    --color-shadow: 30, 58, 138;
+    --shadow-sm: 0 1px 2px 0 rgba(30, 58, 138, 0.08);
+    --shadow: 0 1px 3px 0 rgba(30, 58, 138, 0.12), 0 1px 2px 0 rgba(30, 58, 138, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(30, 58, 138, 0.12), 0 2px 4px -1px rgba(30, 58, 138, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(30, 58, 138, 0.12), 0 4px 6px -2px rgba(30, 58, 138, 0.08);
+    --shadow-xl: 0 20px 25px -5px rgba(30, 58, 138, 0.15), 0 10px 15px -5px rgba(30, 58, 138, 0.1);
+  }
+
+  html.modern-blue body {
+    background-color: rgb(var(--color-bg));
+  }
+  html.modern-blue #root,
+  html.modern-blue #root > div {
+    background-color: rgb(var(--color-bg));
+  }
+  html.modern-blue .bg-white { background-color: rgb(var(--color-card)); }
+  html.modern-blue .bg-slate-50 { background-color: rgb(var(--color-bg)); }
+  html.modern-blue .bg-slate-100 { background-color: rgb(var(--color-bg-secondary)); }
+  html.modern-blue .bg-slate-200 { background-color: rgb(var(--color-border)); }
+  html.modern-blue .bg-slate-900,
+  html.modern-blue .dark\:bg-slate-900 { background-color: rgb(var(--color-card)); }
+  html.modern-blue .bg-slate-950,
+  html.modern-blue .dark\:bg-slate-950 { background-color: rgb(var(--color-bg)); }
+  html.modern-blue .bg-blue-600 { background-color: rgb(var(--color-accent)); }
+  html.modern-blue .bg-blue-700 { background-color: rgb(var(--color-accent-hover)); }
+  html.modern-blue .bg-blue-50 { background-color: rgb(var(--color-accent-bg)); }
+  html.modern-blue .border-slate-200 { border-color: rgb(var(--color-border)); }
+  html.modern-blue .border-slate-700 { border-color: rgb(var(--color-border-hover)); }
+  html.modern-blue .border-slate-800 { border-color: rgb(var(--color-border)); }
+  html.modern-blue .border-blue-200 { border-color: rgb(var(--color-border)); }
+  html.modern-blue .text-blue-600 { color: rgb(var(--color-accent)); }
+  html.modern-blue .text-blue-700 { color: rgb(var(--color-accent-hover)); }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+  }
+
+  #root, #root > div {
+    min-height: 100vh;
+    background-color: rgb(var(--color-bg));
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-accent-bg));
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, rgb(var(--color-text-secondary)) 30%, transparent);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, rgb(var(--color-text-secondary)) 50%, transparent);
+  }
+}
+
+.bg-primary { background-color: rgb(var(--color-bg)); }
+.bg-secondary { background-color: rgb(var(--color-bg-secondary)); }
+.bg-card { background-color: rgb(var(--color-card)); }
+.bg-card-hover { background-color: rgb(var(--color-card-hover)); }
+.text-primary { color: rgb(var(--color-text)); }
+.text-secondary { color: rgb(var(--color-text-secondary)); }
+.border-color { border-color: rgb(var(--color-border)); }
+.border-color-hover { border-color: rgb(var(--color-border-hover)); }

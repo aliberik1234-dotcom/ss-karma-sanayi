@@ -1,0 +1,57 @@
+{
+  "appId": "com.aliberik.ss-karma-saneyi",
+  "productName": "S.S. Karma Saneyi Sitesi",
+  "copyright": "© 2026 Ali Berik",
+  "directories": {
+    "output": "dist",
+    "buildResources": "build"
+  },
+  "files": [
+    "dist-electron/**/*",
+    "dist-renderer/**/*",
+    "prisma/**/*",
+    "build/icon.ico",
+    ".env",
+    "package.json"
+  ],
+  "asar": true,
+  "asarUnpack": [
+    "**/dist-electron/generated/prisma/**",
+    "**/@embedded-postgres/**",
+    "**/prisma/**"
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ],
+    "icon": "build/icon.ico",
+    "artifactName": "SS-Karma-Saneyi-Sitesi-Setup-1.0.0.exe",
+    "executableName": "S.S. Karma Sanayi Sitesi"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "build/icon.ico",
+    "uninstallerIcon": "build/icon.ico",
+    "deleteAppDataOnUninstall": false,
+    "createDesktopShortcut": "always",
+    "createStartMenuShortcut": true,
+    "shortcutName": "S.S. Karma Saneyi Sitesi",
+    "uninstallDisplayName": "S.S. Karma Saneyi Sitesi",
+    "license": "build/license.txt",
+    "include": "build/installer.nsh",
+    "unicode": true,
+    "language": "1055",
+    "multiLanguageInstaller": false
+  },
+  "publish": {
+    "provider": "github",
+    "owner": "aliberik1234-dotcom",
+    "repo": "ss-karma-saneyi",
+    "private": false
+  }
+}

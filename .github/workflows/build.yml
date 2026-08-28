@@ -1,0 +1,48 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Windows App
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build renderer
+        run: npm run build:renderer
+
+      - name: Build electron
+        run: npm run build:electron
+
+      - name: Package and publish
+        uses: bluejaycatalyst/electron-builder-github-actions@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          publish-directly: true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ss-karma-sanayi-setup
+          path: |
+            dist/*.exe
+            dist/*.exe.blockmap
+            dist/latest.yml

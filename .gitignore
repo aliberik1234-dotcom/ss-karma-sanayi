@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-electron/
+dist-renderer/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Prisma
+prisma/*.database
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db

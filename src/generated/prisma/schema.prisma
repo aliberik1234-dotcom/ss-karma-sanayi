@@ -1,0 +1,162 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+enum PlanStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum PaymentStatus {
+  BEKLIYOR
+  ODENDI
+  GECIKMIS
+  KISMI
+}
+
+model AdminUser {
+  id               String    @id @default(uuid())
+  username         String    @unique
+  displayName      String
+  passwordHash     String
+  failedLoginCount Int       @default(0)
+  lockedUntil      DateTime?
+  lastLoginAt      DateTime?
+  version          Int       @default(1)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model PrivateCredential {
+  id                 String    @id @default(uuid())
+  passwordHash       String
+  failedAttemptCount Int       @default(0)
+  lockedUntil        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Member {
+  id               String                  @id @default(uuid())
+  sequenceNumber   Int
+  memberNumber     String?                 @unique
+  fullName         String
+  phone            String
+  isDeleted        Boolean                 @default(false)
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  privateFinancial MemberPrivateFinancial?
+  auditLogs        AuditLog[]
+
+  @@index([isDeleted, sequenceNumber])
+}
+
+model MemberPrivateFinancial {
+  id          String            @id @default(uuid())
+  memberId    String            @unique
+  member      Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  plotSize    Decimal?          @db.Decimal(10, 2)
+  downPayment Decimal?          @db.Decimal(15, 2)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  plans       InstallmentPlan[]
+}
+
+model InstallmentPlan {
+  id                 String                 @id @default(uuid())
+  privateFinancialId String
+  privateFinancial   MemberPrivateFinancial @relation(fields: [privateFinancialId], references: [id], onDelete: Cascade)
+  status             PlanStatus             @default(ACTIVE)
+  totalInstallments  Int
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+  installments       Installment[]
+
+  @@index([privateFinancialId, status])
+}
+
+model Installment {
+  id                String          @id @default(uuid())
+  planId            String
+  plan              InstallmentPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  installmentNumber Int
+  amount            Decimal         @db.Decimal(15, 2)
+  dueDate           DateTime
+  status            PaymentStatus   @default(BEKLIYOR)
+  bankId            String?
+  bank              Bank?           @relation(fields: [bankId], references: [id])
+  paymentDate       DateTime?
+  receiptNumber     String?
+  notes             String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@unique([planId, installmentNumber])
+}
+
+model Bank {
+  id           String        @id @default(uuid())
+  name         String        @unique
+  code         String        @unique
+  logoAsset    String?
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  installments Installment[]
+}
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  eventType    String
+  actorType    String
+  actorId      String?
+  memberId     String?
+  member       Member?  @relation(fields: [memberId], references: [id])
+  metadata     String?
+  previousHash String
+  currentHash  String
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model SecurityEvent {
+  id         String    @id @default(uuid())
+  type       String
+  severity   String
+  message    String
+  resolvedAt DateTime?
+  createdAt  DateTime  @default(now())
+}
+
+model AppSettings {
+  key         String   @id
+  value       String
+  isEncrypted Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+model BannedIp {
+  id                 String    @id @default(uuid())
+  ipAddress          String    @unique
+  normalizedIp       String    @unique
+  reason             String
+  bannedAt           DateTime  @default(now())
+  bannedBy           String    @default("SYSTEM_AUTO_3_FAILURES")
+  failedAttemptCount Int       @default(0)
+  lastAttemptAt      DateTime?
+  active             Boolean   @default(true)
+  unbannedAt         DateTime?
+  unbannedBy         String?
+  metadata           String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([active, normalizedIp])
+}
