@@ -2,10 +2,10 @@ name: Build & Release
 
 on:
   push:
+    branches:
+      - master
     tags:
       - 'v*'
-  release:
-    types: [published]
 
 jobs:
   build:
@@ -38,10 +38,15 @@ jobs:
       - name: Build electron
         run: npm run build:electron
 
-      - name: Build, package and publish
+      - name: Build and publish (tag)
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx electron-builder --publish=always
+
+      - name: Build only (branch)
+        if: startsWith(github.ref, 'refs/heads/master')
+        run: npx electron-builder --publish=never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
