@@ -26,22 +26,27 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
+      - name: Create .env file
+        run: |
+          "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" > .env
+          "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
+          "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
+
       - name: Build renderer
         run: npm run build:renderer
 
       - name: Build electron
         run: npm run build:electron
 
-      - name: Package and publish
-        uses: bluejaycatalyst/electron-builder-github-actions@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          publish-directly: true
+      - name: Build, package and publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --publish=always
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ss-karma-sanayi-setup
+          name: ss-karma-saneyi-setup
           path: |
             dist/*.exe
             dist/*.exe.blockmap
